@@ -206,11 +206,15 @@ detect_vmx_features(void)
 		(uint64_t)(lo | (uint64_t)hi << 32));
 	report_capability(proc_based, 21, lo, hi);
 
-    /* Secondary process based controls */
-	rdmsr(IA32_VMX_PROCBASED_CTLS2, lo, hi);
-	pr_info("Secondary process based  Controls MSR: 0x%llx\n",
-		(uint64_t)(lo | (uint64_t)hi << 32));
-	report_capability(second_proc_based, 27, lo, hi);
+	/* If "Activate Secondary Controls" can set=True */
+	if(hi & (1 << 31))
+	{
+		/* Secondary process based controls */
+		rdmsr(IA32_VMX_PROCBASED_CTLS2, lo, hi);
+		pr_info("Secondary process based  Controls MSR: 0x%llx\n",
+			(uint64_t)(lo | (uint64_t)hi << 32));
+		report_capability(second_proc_based, 27, lo, hi);
+	}
 
     /* Exit controls */
 	rdmsr(IA32_VMX_EXIT_CTLS, lo, hi);
