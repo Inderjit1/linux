@@ -44,6 +44,7 @@ To complete this assignment, a distro of Linux (any version) was required. The o
 
 8) The kernel module can be built using:
 ```
+  $ git checkout VMX_ASSIGNMENT
   $ make
 ```
 
@@ -61,3 +62,6 @@ To complete this assignment, a distro of Linux (any version) was required. The o
 ```
   $ sudo dmesg
 ```
+
+The kernel message output of the module that we received when installing the module ourselves can be viewed here. 
+https://github.com/Inderjit1/linux/blob/VMX_ASSIGNMENT/output.txt
