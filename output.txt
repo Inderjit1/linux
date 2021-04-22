@@ -1,0 +1,86 @@
+[Thu Apr 22 00:28:50 2021] CMPE 283 Assignment 1 Module Start
+[Thu Apr 22 00:28:50 2021] Pinbased Controls MSR: 0x3f0000003f
+[Thu Apr 22 00:28:50 2021]   External Interrupt Exiting: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   NMI Exiting: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   Virtual NMIs: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   Activate VMX Preemption Timer: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Process Posted Interrupts: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021] Primary Process based Controls MSR: 0xf5f9fffe9501e97a
+[Thu Apr 22 00:28:50 2021]   Interrupt Window Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Use TSC offsetting: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   HLT exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   INVLPG Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   MWAIT Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   RDPMC Exiting: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   RDTSC Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   CR3 Load Exiting: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   CR3 Store Exiting: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   CR8 Load Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   CR8 Store Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Use TPR Shadow: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   NMI Window Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   MOV-DR Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Unconditional I/O Exiting: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   Use I/O Bitmaps: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Monitor Trap Flag: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Use MSR Bitmaps: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   MONITOR Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   PAUSE Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Activate Secondary Controls: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021] Secondary process based  Controls MSR: 0x111cfe00000000
+[Thu Apr 22 00:28:50 2021]   Virtualize APIC accesses: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable EPT: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Descriptor Table Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable RDTSCP: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Virtualize x2APIC mode: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable VPID: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   WBINVD exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Unrestricted guest: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   APIC Register Virtualization: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Virtual Interrupt Delivery: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   PAUSE Loop Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   RDRAND Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable INVPCID: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable VM Functions: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   VMCS Shadowing: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable ENCLS Exiting: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   RDSEED Exiting: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable PML: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   EPT Violation #VE: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Conceal VMX From PT: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable XSAVES/XRSTORS: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Mode Based Execute Control For EPT: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Sub Page Write Permissions For EPT: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Intel PT Uses Guest Physical aAdresses: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Use TSC Scaling: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable User Wait And Pause: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Enable ENCLV Exiting: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021] Exit based Controls MSR: 0x3fffff00036dff
+[Thu Apr 22 00:28:50 2021]   Save Debug Controls: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   Host Address Space Size: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load IA32_PERF_GLOBAL_CTRL: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Acknowledge Interrupt On Exit : Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Save IA32_PAT: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load IA32_PAT: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Save IA32_EFER: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load IA32_EFER: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Save VMX Preemption Timer Value: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Clear IA32_BNDCFGS: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Conceal VMX from PT: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Clear IA32_RTIT_CTL: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load CET State: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load PKRS: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021] Entry based Controls MSR: 0xf3ff000011ff
+[Thu Apr 22 00:28:50 2021]   Load Debug Controls: Can set=Yes, Can clear=No
+[Thu Apr 22 00:28:50 2021]   IA-32e Mode Guest: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   IA-32e Mode Guest: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Deactivate Dual Monitor Treatment: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load IA32_PERF_GLOBAL_CTRL: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load IA32_PAT: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load IA32_EFER: Can set=Yes, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load IA32_BNDCFGS: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Conceal VMX From PT: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load IA32_RTIT_CTL: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load CET State: Can set=No, Can clear=Yes
+[Thu Apr 22 00:28:50 2021]   Load PKRS: Can set=No, Can clear=Yes
+[Thu Apr 22 00:53:50 2021] CMPE 283 Assignment 1 Module Exits
