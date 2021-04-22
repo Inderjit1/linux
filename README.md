@@ -7,7 +7,7 @@
 ## Question 1 - For each member in your team, provide 1 paragraph detailing what parts of the lab that member implemented / researched.
 Inderjit Bassi - I implemented mapping (locating and incorporating from the SDM) the primary process based, secondary processed base, entry and exit control structures from the SDM to the C file. In addition to implementing the primary process based, secondary processed base, entry and exit controls in the detect_vmx_features function (performs the rdmsr, pr_info and report_capability).
 
-Eugene Clewlow - I implemented the check for activating secondary controls in primary processes base controls before performing msr reads of secondary processes based controls.
+Eugene Clewlow - I implemented the check for activating secondary controls in primary processes base controls before performing msr reads of secondary processes based controls.  I also built the Linux kernel and built and installed the module.
 
 ## Questin 2 - Describe in detail the steps you used to complete the assignment. Consider your reader to be someone skilled in software development but otherwise unfamiliar with the assignment. Good answers to this question will be recipes that someone can follow to reproduce your development steps.
 
