@@ -66,6 +66,8 @@
 MODULE_AUTHOR("Qumranet");
 MODULE_LICENSE("GPL");
 
+u32 exit_count;
+
 #ifdef MODULE
 static const struct x86_cpu_id vmx_cpu_id[] = {
 	X86_MATCH_FEATURE(X86_FEATURE_VMX, NULL),
@@ -6104,7 +6106,19 @@ unexpected_vmexit:
 
 static int vmx_handle_exit(struct kvm_vcpu *vcpu, fastpath_t exit_fastpath)
 {
-	int ret = __vmx_handle_exit(vcpu, exit_fastpath);
+	int ret;
+	u64 start_time = 0;
+	u64 end_time = 0;
+	exit_count = vcpu->exit_cycle_counts.exit_count_total;
+	exit_count++;
+	vcpu->exit_cycle_counts.exit_count_total = exit_count;
+	
+	start_time = rdtsc();
+
+	ret = __vmx_handle_exit(vcpu, exit_fastpath);
+
+	end_time = rdtsc();	
+	vcpu->exit_cycle_counts.cycle_count_total = vcpu->exit_cycle_counts.cycle_count_total + end_time - start_time;
 
 	/*
 	 * Even when current exit reason is handled by KVM internally, we
