@@ -24,6 +24,7 @@ the problems which may result by upgrading your kernel.
 **Team Members: Inderjit Bassi, Eugene Clewlow**
 
 ## Question 1 - For each member in your team, provide 1 paragraph detailing what parts of the lab that member implemented / researched.
+
 Inderjit Bassi - Added code to arch/x86/kvm/vmx/vmx.c to track and handle the CPUID leaf function for 0x4FFFFFFF (reading data into eax, ebx, ecx register based on requirements).
 
 Eugene Clewlow - I added code to include/linux/kvm_host.h and arch/x86/kvm/vmx/vmx.c to keep track of cycles spent for exiting and exit count.
