@@ -16,3 +16,57 @@ several of them using the Restructured Text markup notation.
 Please read the Documentation/process/changes.rst file, as it contains the
 requirements for building and running the kernel, and information about
 the problems which may result by upgrading your kernel.
+
+
+# Assignment 2: Modifying instruction behavior in KVM 
+**CMPE 283 Virtualization - Assignment 2**
+
+**Team Members: Inderjit Bassi, Eugene Clewlow**
+
+## Question 1 - For each member in your team, provide 1 paragraph detailing what parts of the lab that member implemented / researched.
+Inderjit Bassi - Added code to arch/x86/kvm/vmx/vmx.c to track and handle the CPUID leaf function for 0x4FFFFFFF (reading data into eax, ebx, ecx register based on requirements).
+
+Eugene Clewlow - I added code to include/linux/kvm_host.h and arch/x86/kvm/vmx/vmx.c to keep track of cycles spent for exiting and exit count.
+
+
+## Question 2 - Describe in detail the steps you used to complete the assignment. Consider your reader to be someone skilled in software development but otherwise unfamiliar with the assignment. Good answers to this question will be recipes that someone can follow to reproduce your development steps.
+
+To complete this assignment, a distro of Linux (any version) was required. The one used for this was Ubuntu 20.04 LTS. After installing this .iso image on VirtualBox and VMWare, there are few packages that need to be installed. Needed to install the following: git, make and all of the necessary gcc compilation packages. 
+
+*** Note: This assignment builds upon the steps listed in assignment 1 (installing Linux Kernel, make command, etc.). ***
+
+1) Install the following libraries (QEMU is used to install KVM, Virt-Manager is used to manage VM installations):
+```
+    sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+```
+
+2) Verify KVM Installation with either command listed below (output window should show no errors):
+```
+    sudo virsh -c gemu://system list 
+    sudo virsh list --all
+```
+
+3) Verify KVM virtualization is enabled on machine (“KVM acceleration can be used” should be displayed):
+```
+    kvm -ok 
+```
+
+4) Follow the necessary steps for downloading an .iso and qcow file(s):
+    * Download the iso image for any Linux distribution(s), example: 
+        ```
+           sudo wget https://releases.ubuntu.com/20.04/ubuntu-20.04.2-live-server-amd64.iso
+          ```
+    * Create disk image used by QEMU
+        ```
+            sudo qemu-img create -f qcow2 ubuntu.qcow 20G
+        ```
+5) Startup Virtual Manager setup:
+```
+    sudo virt-manager
+```
+
+6) Follow the installation steps and the VM installation should be up and running. Here is a great documentation guide that details virtual manager setup: https://phoenixnap.com/kb/ubuntu-install-kvm
+
+## Question 3- Comment on the frequency of exits – does the number of exits increase at a stable rate? Or are there more exits performed during certain VM operations? Approximately how many exits does a full VM boot entail? 
+
+The frequency of exits that inside the KVM occurs at a fairly stable rate - this is dependent on the VM operations that are being performed. The stable rate means the number of exits for most common VM operations executed for a VM within a VM occur at the same measured rate. Depending on the types of exits and exit handling controls enabled, the number of exits performed vary. 
