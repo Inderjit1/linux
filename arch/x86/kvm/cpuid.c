@@ -1137,6 +1137,9 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 	if (cpuid_fault_enabled(vcpu) && !kvm_require_cpl(vcpu, 0))
 		return 1;
 	
+	eax = kvm_rax_read(vcpu);
+	ecx = kvm_rcx_read(vcpu);
+
 	/*
 	 Description: Checks the special leaf function for CPUID. It outputs the number of exits and cycles spent in those exits.
 	 In addition, it returns the 32 bit high and 32 bit low of the total time spent processing into the ebx and ecx registers.
@@ -1150,8 +1153,6 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 		printk(KERN_INFO "CPUID(0x4FFFFFFF), exits= %u, cycles spent in exit= %llu", numberOfCpuExits, (unsigned long long) numberOfCycles);
         }
         else {
-        	eax = kvm_rax_read(vcpu);
-		ecx = kvm_rcx_read(vcpu);
 		kvm_cpuid(vcpu, &eax, &ebx, &ecx, &edx, false);
 	}
 
