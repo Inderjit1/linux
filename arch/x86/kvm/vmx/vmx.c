@@ -6109,9 +6109,14 @@ static int vmx_handle_exit(struct kvm_vcpu *vcpu, fastpath_t exit_fastpath)
 	int ret;
 	u64 start_time = 0;
 	u64 end_time = 0;
+
+	struct vcpu_vmx *vmx = to_vmx(vcpu);
+
 	exit_count = vcpu->kvm->exit_cycle_counts.exit_count_total;
 	exit_count++;
 	vcpu->kvm->exit_cycle_counts.exit_count_total = exit_count;
+	
+	to_kvm_vmx(vcpu->kvm)->exit_counts[vmx->exit_reason.basic]++;
 	
 	start_time = rdtsc();
 

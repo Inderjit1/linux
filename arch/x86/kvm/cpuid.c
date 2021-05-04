@@ -23,6 +23,8 @@
 #include "mmu.h"
 #include "trace.h"
 #include "pmu.h"
+#include "vmx/vmx.h"
+
 
 /*
  * Unlike "struct cpuinfo_x86.x86_capability", kvm_cpu_caps doesn't need to be
@@ -1129,9 +1131,63 @@ bool kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx,
 }
 EXPORT_SYMBOL_GPL(kvm_cpuid);
 
+static int kvm_vmx_exit_handlers[] = {
+	[EXIT_REASON_EXCEPTION_NMI]           = 1,
+	[EXIT_REASON_EXTERNAL_INTERRUPT]      = 1,
+	[EXIT_REASON_TRIPLE_FAULT]            = 1,
+	[EXIT_REASON_NMI_WINDOW]	      = 1,
+	[EXIT_REASON_IO_INSTRUCTION]          = 1,
+	[EXIT_REASON_CR_ACCESS]               = 1,
+	[EXIT_REASON_DR_ACCESS]               = 1,
+	[EXIT_REASON_CPUID]                   = 1,
+	[EXIT_REASON_MSR_READ]                = 1,
+	[EXIT_REASON_MSR_WRITE]               = 1,
+	[EXIT_REASON_INTERRUPT_WINDOW]        = 1,
+	[EXIT_REASON_HLT]                     = 1,
+	[EXIT_REASON_INVD]		      = 1,
+	[EXIT_REASON_INVLPG]		      = 1,
+	[EXIT_REASON_RDPMC]                   = 1,
+	[EXIT_REASON_VMCALL]                  = 1,
+	[EXIT_REASON_VMCLEAR]		      = 1,
+	[EXIT_REASON_VMLAUNCH]		      = 1,
+	[EXIT_REASON_VMPTRLD]		      = 1,
+	[EXIT_REASON_VMPTRST]		      = 1,
+	[EXIT_REASON_VMREAD]		      = 1,
+	[EXIT_REASON_VMRESUME]		      = 1,
+	[EXIT_REASON_VMWRITE]		      = 1,
+	[EXIT_REASON_VMOFF]		      = 1,
+	[EXIT_REASON_VMON]		      = 1,
+	[EXIT_REASON_TPR_BELOW_THRESHOLD]     = 1,
+	[EXIT_REASON_APIC_ACCESS]             = 1,
+	[EXIT_REASON_APIC_WRITE]              = 1,
+	[EXIT_REASON_EOI_INDUCED]             = 1,
+	[EXIT_REASON_WBINVD]                  = 1,
+	[EXIT_REASON_XSETBV]                  = 1,
+	[EXIT_REASON_TASK_SWITCH]             = 1,
+	[EXIT_REASON_MCE_DURING_VMENTRY]      = 1,
+	[EXIT_REASON_GDTR_IDTR]		      = 1,
+	[EXIT_REASON_LDTR_TR]		      = 1,
+	[EXIT_REASON_EPT_VIOLATION]	      = 1,
+	[EXIT_REASON_EPT_MISCONFIG]           = 1,
+	[EXIT_REASON_PAUSE_INSTRUCTION]       = 1,
+	[EXIT_REASON_MWAIT_INSTRUCTION]	      = 1,
+	[EXIT_REASON_MONITOR_TRAP_FLAG]       = 1,
+	[EXIT_REASON_MONITOR_INSTRUCTION]     = 1,
+	[EXIT_REASON_INVEPT]                  = 1,
+	[EXIT_REASON_INVVPID]                 = 1,
+	[EXIT_REASON_RDRAND]                  = 1,
+	[EXIT_REASON_RDSEED]                  = 1,
+	[EXIT_REASON_PML_FULL]		      = 1,
+	[EXIT_REASON_INVPCID]                 = 1,
+	[EXIT_REASON_VMFUNC]		      = 1,
+	[EXIT_REASON_PREEMPTION_TIMER]	      = 1,
+	[EXIT_REASON_ENCLS]		      = 1,
+	[EXIT_REASON_BUS_LOCK]                = 1,
+};
+
 int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 {
-		u32 eax, ebx, ecx, edx;
+	u32 eax, ebx, ecx, edx;
 	u32 numberOfCpuExits, numberOfCycles;
 
 	if (cpuid_fault_enabled(vcpu) && !kvm_require_cpl(vcpu, 0))
@@ -1160,25 +1216,29 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
         */
         else if(eax == 0x4FFFFFFE){
                 if(ecx > 68 || ecx < 0){
-                        eax = 0;
-                        ebx = 0;
-                        ecx = 0;
-                        edx = 0xFFFFFFFF;
-                        printk(KERN_INFO "For CPUID(0x4FFFFFFE), ECX exit value does not exist in the SDM");
+                	eax = 0;
+                	ebx = 0;
+                	ecx = 0;
+                	edx = 0xFFFFFFFF;
+                	printk(KERN_INFO "For CPUID(0x4FFFFFFE), ECX exit value does not exist in the SDM");
 
                 }
-                else if(!exitReason[ecx]){
-                        eax = 0;
-                        ebx = 0;
-                        ecx = 0;
-                        edx = 0;
-                        printk(KERN_INFO "For CPUID(0x4FFFFFFE), exit types are not enabled in the KVM");
-                }       
-                else{
-                        eax = (&exitReason[ecx]);
-                        ebx = (u32)(numberOfCycles & 0xFFFFFFFF00000000);
-		        ecx = (u32)(numberOfCycles & 0xFFFFFFFF);
-                        printk(KERN_INFO "CPUID(0x4FFFFFFE), exit number= %u, exits= %llu", ecx, eax);
+                
+        	else if(!kvm_vmx_exit_handlers[ecx]){
+                	eax = 0;
+                	ebx = 0;
+                	ecx = 0;
+                	edx = 0;
+                	printk(KERN_INFO "For CPUID(0x4FFFFFFE), exit types are not enabled in the KVM");
+                }
+                else {
+	        	numberOfCpuExits = to_kvm_vmx(vcpu->kvm)->exit_counts[ecx];
+        
+                	eax = numberOfCpuExits;
+                	printk(KERN_INFO "CPUID(0x4FFFFFFE), exit number= %u, exits= %llu", ecx, (unsigned long long) eax);
+                	ebx = 0;
+        		ecx = 0;
+        		edx = 0;
                 }
         }
         else {

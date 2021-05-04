@@ -346,6 +346,8 @@ enum ept_pointers_status {
 
 struct kvm_vmx {
 	struct kvm kvm;
+	
+	u32 exit_counts[75];
 
 	unsigned int tss_addr;
 	bool ept_identity_pagetable_done;
@@ -355,6 +357,7 @@ struct kvm_vmx {
 	spinlock_t ept_pointer_lock;
 };
 
+	
 bool nested_vmx_allowed(struct kvm_vcpu *vcpu);
 void vmx_vcpu_load_vmcs(struct kvm_vcpu *vcpu, int cpu,
 			struct loaded_vmcs *buddy);
