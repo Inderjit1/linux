@@ -1145,8 +1145,8 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 	 In addition, it returns the 32 bit high and 32 bit low of the total time spent processing into the ebx and ecx registers.
 	*/
 	if (eax == 0x4FFFFFFF){
-		numberOfCpuExits = vcpu->exit_cycle_counts.exit_count_total;
-		numberOfCycles = vcpu->exit_cycle_counts.cycle_count_total;
+		numberOfCpuExits = vcpu->kvm->exit_cycle_counts.exit_count_total;
+		numberOfCycles = vcpu->kvm->exit_cycle_counts.cycle_count_total;
 		eax = numberOfCpuExits;
 		ebx = (u32)((numberOfCycles & 0xFFFFFFFF00000000LL) >> 32);
 		ecx = (u32)(numberOfCycles & 0xFFFFFFFFLL);

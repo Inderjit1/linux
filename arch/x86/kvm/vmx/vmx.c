@@ -6109,16 +6109,16 @@ static int vmx_handle_exit(struct kvm_vcpu *vcpu, fastpath_t exit_fastpath)
 	int ret;
 	u64 start_time = 0;
 	u64 end_time = 0;
-	exit_count = vcpu->exit_cycle_counts.exit_count_total;
+	exit_count = vcpu->kvm->exit_cycle_counts.exit_count_total;
 	exit_count++;
-	vcpu->exit_cycle_counts.exit_count_total = exit_count;
+	vcpu->kvm->exit_cycle_counts.exit_count_total = exit_count;
 	
 	start_time = rdtsc();
 
 	ret = __vmx_handle_exit(vcpu, exit_fastpath);
 
 	end_time = rdtsc();	
-	vcpu->exit_cycle_counts.cycle_count_total = vcpu->exit_cycle_counts.cycle_count_total + end_time - start_time;
+	vcpu->kvm->exit_cycle_counts.cycle_count_total = vcpu->kvm->exit_cycle_counts.cycle_count_total + end_time - start_time;
 
 	/*
 	 * Even when current exit reason is handled by KVM internally, we
