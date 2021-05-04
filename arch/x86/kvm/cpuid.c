@@ -1131,7 +1131,7 @@ EXPORT_SYMBOL_GPL(kvm_cpuid);
 
 int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 {
-	u32 eax, ebx, ecx, edx;
+		u32 eax, ebx, ecx, edx;
 	u32 numberOfCpuExits, numberOfCycles;
 
 	if (cpuid_fault_enabled(vcpu) && !kvm_require_cpl(vcpu, 0))
@@ -1151,6 +1151,35 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 		ebx = (u32)((numberOfCycles & 0xFFFFFFFF00000000LL) >> 32);
 		ecx = (u32)(numberOfCycles & 0xFFFFFFFFLL);
 		printk(KERN_INFO "CPUID(0x4FFFFFFF), exits= %u, cycles spent in exit= %llu", numberOfCpuExits, (unsigned long long) numberOfCycles);
+        }
+        /*
+         Description: Checks the special leaf function 0x4FFFFFFE for CPUID. Checks SDM for all valid ECX value ranges, defaults to certain values if outside range.
+         In addition, the ECX input exit reason is stored inside the EAX register and outputed.
+
+         Reference for Exit Types: SDM Volume 2A 3-220
+        */
+        else if(eax == 0x4FFFFFFE){
+                if(ecx > 68 || ecx < 0){
+                        eax = 0;
+                        ebx = 0;
+                        ecx = 0;
+                        edx = 0xFFFFFFFF;
+                        printk(KERN_INFO "For CPUID(0x4FFFFFFE), ECX exit value does not exist in the SDM");
+
+                }
+                else if(!exitReason[ecx]){
+                        eax = 0;
+                        ebx = 0;
+                        ecx = 0;
+                        edx = 0;
+                        printk(KERN_INFO "For CPUID(0x4FFFFFFE), exit types are not enabled in the KVM");
+                }       
+                else{
+                        eax = (&exitReason[ecx]);
+                        ebx = (u32)(numberOfCycles & 0xFFFFFFFF00000000);
+		        ecx = (u32)(numberOfCycles & 0xFFFFFFFF);
+                        printk(KERN_INFO "CPUID(0x4FFFFFFE), exit number= %u, exits= %llu", ecx, eax);
+                }
         }
         else {
 		kvm_cpuid(vcpu, &eax, &ebx, &ecx, &edx, false);
