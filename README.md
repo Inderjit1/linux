@@ -80,9 +80,9 @@ The frequency of exits that inside the KVM occurs at a fairly stable rate - this
 
 ## Question 1 - For each member in your team, provide 1 paragraph detailing what parts of the lab that member implemented / researched.
 
-Inderjit Bassi - Added code to arch/x86/kvm/vmx/vmx.c to track and handle the CPUID leaf function for 0x4FFFFFFF (reading data into eax, ebx, ecx register based on requirements).
+Inderjit Bassi -
 
-Eugene Clewlow - I added code to include/linux/kvm_host.h and arch/x86/kvm/vmx/vmx.c to keep track of cycles spent for exiting and exit count.
+Eugene Clewlow - I added code to the KVM (specifically the Intel KVM/VMX) to keep track of the exit types and exit counts.
 
 
 ## Question 2 - Describe in detail the steps you used to complete the assignment. Consider your reader to be someone skilled in software development but otherwise unfamiliar with the assignment. Good answers to this question will be recipes that someone can follow to reproduce your development steps.
@@ -96,7 +96,7 @@ We wrote code to test our changes and in order to answer Questions 3 & 4
 
 ## Question 3 - Comment on the frequency of exits – does the number of exits increase at a stable rate? Or are there more exits performed during certain VM operations? Approximately how many exits does a full VM boot entail?
 
-
+A full VM boot entails 1,971,700 exits.  The exits increase at a somewhat stable rate.  The EXIT_REASON_HLT exit, for example seems to increase at a stable rate.  We think it also depends somewhat on the user's activity.  Quite a few exits occured at VM boot.  It seems that editing files tends to cause the EXIT_REASON_MSR_WRITE to increase substantially.
 
 ## Question 4 - Of the exit types defined in the SDM, which are the most frequent? Least?
 
