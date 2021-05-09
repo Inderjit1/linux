@@ -82,7 +82,7 @@ The frequency of exits that inside the KVM occurs at a fairly stable rate - this
 
 Inderjit Bassi -
 
-Eugene Clewlow - I added code to the KVM (specifically the Intel KVM/VMX) to keep track of the exit types and exit counts.
+Eugene Clewlow - I added code to the KVM (specifically the Intel KVM/VMX) to keep track of the exit types and exit counts.  I also wrote the test application which queried the new CPUID leaf for all exit types/counts.
 
 
 ## Question 2 - Describe in detail the steps you used to complete the assignment. Consider your reader to be someone skilled in software development but otherwise unfamiliar with the assignment. Good answers to this question will be recipes that someone can follow to reproduce your development steps.
