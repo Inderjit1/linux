@@ -80,7 +80,7 @@ The frequency of exits that inside the KVM occurs at a fairly stable rate - this
 
 ## Question 1 - For each member in your team, provide 1 paragraph detailing what parts of the lab that member implemented / researched.
 
-Inderjit Bassi -
+Inderjit Bassi - Added code to CPUID.C to handle special leaf function of 0x4FFFFFFE. Handled edge cases as provided in assignment requirements (checking SDM for valid ECX inputs, storing appropriate responses in the registers, etc.).
 
 Eugene Clewlow - I added code to the KVM (specifically the Intel KVM/VMX) to keep track of the exit types and exit counts.  I also wrote the test application which queried the new CPUID leaf for all exit types/counts.
 
@@ -90,6 +90,15 @@ Eugene Clewlow - I added code to the KVM (specifically the Intel KVM/VMX) to kee
 A new count tracking code implementation needed to be added to the VMX, one that could count multiple exit types at once.  So we used an array as a data structure to handle the counting.  We also needed code in the cpuid emulation to handle the new leaf requirement.
 
 Once our code changes were done, we rebuilt the kernel and installed it.
+1) To rebuild and install the kernel:
+```
+    sudo make modules && sudo make && sudo make modules_install && suod make install && sudo reboot
+```
+
+2) Verify output (navigate to outer VM):
+```
+    dmesg
+```
 
 We wrote code to test our changes and in order to answer Questions 3 & 4
 
