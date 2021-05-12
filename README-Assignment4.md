@@ -4,7 +4,8 @@ Inderjit Bassi -
 
 Eugene Clewlow - 
 
-### Question 2. dmesg output
+### Question 2. Include a sample of your print of exit count output from dmesg from “with ept” and “without ept”.
+
 ```powershell
 # with ept
 [Thu May  6 19:44:26 2021] CPUID(0x4FFFFFFF), exits= 2734937, cycles spent in exit= 3861539392
@@ -162,3 +163,19 @@ Eugene Clewlow -
 [Tue May 11 17:48:41 2021] For CPUID(0x4FFFFFFE), ECX exit value does not exist in the SDM
 [Tue May 11 17:48:41 2021] For CPUID(0x4FFFFFFE), ECX exit value does not exist in the SDM
 ```
+
+
+### 3. What did you learn from the count of exits? Was the count what you expected? If not, why not?
+
+Yes, because shadow paging requires a lot of exit types to be enabled to work, it is expected that the number of exits increases substantially.
+
+### 4.What changed between the two runs (ept vs no-ept)?
+
+The number of exits nearly doubled.
+
+Substantial exit type count differences (without ept vs with ept)
+EXIT_REASON_EXCEPTION_NMI - 992002 vs. 2671
+EXIT_REASON_EXTERNAL_INTERRUPT - 173902 vs. 237071
+EXIT_REASON_INTERRUPT_WINDOW - 35379 vs. 19903
+EXIT_REASON_INVLPG - 595713 vs. 0 (This is invalid page exiting, required for shadow paging)
+EXIT_REASON_CR_ACCESS - 1923280 vs. 160113 (also required for shadow paging)
