@@ -175,8 +175,14 @@ This count is as expected because shadow paging requires a lot of exit types to 
 The number of exits nearly doubled.
 
 Substantial exit type count differences (without ept vs with ept)
+
 EXIT_REASON_EXCEPTION_NMI - 992002 vs. 2671
+
 EXIT_REASON_EXTERNAL_INTERRUPT - 173902 vs. 237071
+
 EXIT_REASON_INTERRUPT_WINDOW - 35379 vs. 19903
+
 EXIT_REASON_INVLPG - 595713 vs. 0 (This is invalid page exiting, required for shadow paging)
+
 EXIT_REASON_CR_ACCESS - 1923280 vs. 160113 (also required for shadow paging)
+
