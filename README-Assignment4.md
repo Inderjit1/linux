@@ -167,7 +167,8 @@ Eugene Clewlow -
 
 ### 3. What did you learn from the count of exits? Was the count what you expected? If not, why not?
 
-Yes, because shadow paging requires a lot of exit types to be enabled to work, it is expected that the number of exits increases substantially.
+The numer of exits increased substantially, particularly invalid page and CR access.
+This count is as expected because shadow paging requires a lot of exit types to be enabled to work. It is expected that the number of exits increases substantially.
 
 ### 4.What changed between the two runs (ept vs no-ept)?
 
