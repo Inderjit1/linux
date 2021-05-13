@@ -1,6 +1,6 @@
 ### Question 1. For each member in your team, provide 1 paragraph detailing what parts of the lab that member implemented / researched. (You may skip this question if you are doing the lab by yourself). 
 
-Inderjit Bassi - 
+Inderjit Bassi - Analyzed the output results for ept and no-ept.
 
 Eugene Clewlow - I wrote the code to print out exit counts for the 0x4FFFFFFE leaf, for both with ept and without ept.
 
